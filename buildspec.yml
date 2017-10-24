@@ -1,0 +1,32 @@
+#
+# code build manifest file
+#
+#
+version: 0.2
+
+environment_variables:
+  plaintext:
+    MY_PROP: "juan"
+
+phases:
+  install:
+    commands:
+      - echo Nothing to do in the install phase...
+  pre_build:
+    commands:
+      - echo running gradle clean...
+      - gradle clean
+  build:
+    commands:
+      - echo Build finished on `date`
+      - gradle srcJar
+  post_build:
+    commands:
+      - echo running tests ...
+      - gradle unitTest --debug
+artifacts:
+  files:
+    - 'core/build/libs/*.jar'
+    - 'clients/build/libs/*.jar'
+    - 'streams/build/libs/*.jar'
+  discard-paths: yes
